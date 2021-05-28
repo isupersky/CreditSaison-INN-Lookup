@@ -1,11 +1,14 @@
 package com.example.CreditSaisonINNLookup.entity;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Bank {
 
-  public String name;
-  public String url;
-  public String phone;
-  public String city;
+  private String name;
+  private String url;
+  private String phone;
+  private String city;
 
   public String getName() {
     return name;
@@ -43,13 +46,4 @@ public class Bank {
     return this;
   }
 
-  @Override
-  public String toString() {
-    return "Bank{" +
-        "name='" + name + '\'' +
-        ", url='" + url + '\'' +
-        ", phone='" + phone + '\'' +
-        ", city='" + city + '\'' +
-        '}';
-  }
 }

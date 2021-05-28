@@ -1,14 +1,20 @@
 package com.example.CreditSaisonINNLookup.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Country {
 
-  public String numeric;
-  public String alpha2;
-  public String name;
-  public String emoji;
-  public String currency;
-  public int latitude;
-  public int longitude;
+  @Column(name = "numerics")
+  private String numeric;
+  private String alpha2;
+  @Column(name = "countryName")
+  private String name;
+  private String emoji;
+  private String currency;
+  private int latitude;
+  private int longitude;
 
   public String getNumeric() {
     return numeric;
@@ -73,16 +79,4 @@ public class Country {
     return this;
   }
 
-  @Override
-  public String toString() {
-    return "Country{" +
-        "numeric='" + numeric + '\'' +
-        ", alpha2='" + alpha2 + '\'' +
-        ", name='" + name + '\'' +
-        ", emoji='" + emoji + '\'' +
-        ", currency='" + currency + '\'' +
-        ", latitude=" + latitude +
-        ", longitude=" + longitude +
-        '}';
-  }
 }

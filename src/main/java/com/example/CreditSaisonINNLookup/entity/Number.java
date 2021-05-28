@@ -1,9 +1,12 @@
 package com.example.CreditSaisonINNLookup.entity;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Number {
 
-  public int length;
-  public boolean luhn;
+  private int length;
+  private boolean luhn;
 
   public int getLength() {
     return length;
