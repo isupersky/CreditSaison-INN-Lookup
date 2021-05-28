@@ -1,8 +1,6 @@
 package com.example.CreditSaisonINNLookup.dto;
 
-import java.util.Collection;
-
-public class ResponseDTO<T> {
+public class CommonResponseDTO<T> {
   private boolean success;
   private T payload;
   private long start;
@@ -10,7 +8,7 @@ public class ResponseDTO<T> {
   private long limit;
   private long size;
 
-  public ResponseDTO(boolean success, T payload) {
+  public CommonResponseDTO(boolean success, T payload) {
     this.success = success;
     this.payload = payload;
   }
@@ -19,7 +17,7 @@ public class ResponseDTO<T> {
     return success;
   }
 
-  public ResponseDTO setSuccess(boolean success) {
+  public CommonResponseDTO setSuccess(boolean success) {
     this.success = success;
     return this;
   }
@@ -28,7 +26,7 @@ public class ResponseDTO<T> {
     return payload;
   }
 
-  public ResponseDTO setPayload(T payload) {
+  public CommonResponseDTO setPayload(T payload) {
     this.payload = payload;
     return this;
   }
@@ -37,7 +35,7 @@ public class ResponseDTO<T> {
     return start;
   }
 
-  public ResponseDTO setStart(long start) {
+  public CommonResponseDTO setStart(long start) {
     this.start = start;
     return this;
   }
@@ -46,7 +44,7 @@ public class ResponseDTO<T> {
     return stop;
   }
 
-  public ResponseDTO setStop(long stop) {
+  public CommonResponseDTO setStop(long stop) {
     this.stop = stop;
     return this;
   }
@@ -55,7 +53,7 @@ public class ResponseDTO<T> {
     return limit;
   }
 
-  public ResponseDTO setLimit(long limit) {
+  public CommonResponseDTO setLimit(long limit) {
     this.limit = limit;
     return this;
   }
@@ -64,14 +62,14 @@ public class ResponseDTO<T> {
     return size;
   }
 
-  public ResponseDTO setSize(long size) {
+  public CommonResponseDTO setSize(long size) {
     this.size = size;
     return this;
   }
-  public static<T> ResponseDTO<T> success(T payload){
-    return new ResponseDTO(true, payload);
+  public static<T> CommonResponseDTO<T> success(T payload){
+    return new CommonResponseDTO(true, payload);
   }
-  public static<T> ResponseDTO<T> failure(String errorMessage){
-    return new ResponseDTO(false, errorMessage);
+  public static<T> CommonResponseDTO<T> failure(String errorMessage){
+    return new CommonResponseDTO(false, errorMessage);
   }
 }
