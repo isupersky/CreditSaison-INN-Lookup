@@ -1,36 +1,82 @@
 package com.example.CreditSaisonINNLookup.dto;
 
+import com.example.CreditSaisonINNLookup.entity.Bank;
+import com.example.CreditSaisonINNLookup.entity.Country;
+import com.example.CreditSaisonINNLookup.entity.Number;
+
 public class CardDetailDTO {
 
+  private Long bin;
+  private Number number;
   private String scheme;
   private String type;
-  private String bank;
+  private String brand;
+  private boolean prepaid;
+  private Country country;
+  private Bank bank;
+
+  public Long getBin() {
+    return bin;
+  }
+
+  public void setBin(Long bin) {
+    this.bin = bin;
+  }
+
+  public Number getNumber() {
+    return number;
+  }
+
+  public void setNumber(Number number) {
+    this.number = number;
+  }
 
   public String getScheme() {
     return scheme;
   }
 
-  public CardDetailDTO setScheme(String scheme) {
+  public void setScheme(String scheme) {
     this.scheme = scheme;
-    return this;
   }
 
   public String getType() {
     return type;
   }
 
-  public CardDetailDTO setType(String type) {
+  public void setType(String type) {
     this.type = type;
-    return this;
   }
 
-  public String getBank() {
+  public String getBrand() {
+    return brand;
+  }
+
+  public void setBrand(String brand) {
+    this.brand = brand;
+  }
+
+  public boolean isPrepaid() {
+    return prepaid;
+  }
+
+  public void setPrepaid(boolean prepaid) {
+    this.prepaid = prepaid;
+  }
+
+  public Country getCountry() {
+    return country;
+  }
+
+  public void setCountry(Country country) {
+    this.country = country;
+  }
+
+  public Bank getBank() {
     return bank;
   }
 
-  public CardDetailDTO setBank(String bank) {
+  public void setBank(Bank bank) {
     this.bank = bank;
-    return this;
   }
 }
 

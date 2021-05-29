@@ -10,6 +10,7 @@ import com.example.CreditSaisonINNLookup.repository.CardDetailsRepository;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +24,9 @@ public class CardSchemeService {
 
   @Autowired
   CardDetailsRepository cardDetailsRepository;
+
+  @Autowired
+  private ModelMapper modelMapper;
 
   public CommonResponseDTO<CardDetailDTO> verifyCardScheme(Long bin) {
     ResponseEntity<CardDetails> responseEntity;
@@ -48,9 +52,7 @@ public class CardSchemeService {
   }
 
   private CardDetailDTO mapCardDetailsToCardDetailDTO(CardDetails cardDetails) {
-    CardDetailDTO cardDetailDTO = new CardDetailDTO();
-    cardDetailDTO.setScheme(cardDetails.getScheme()).setBank(cardDetails.getBank().getName())
-        .setType(cardDetails.getType());
+    CardDetailDTO cardDetailDTO = modelMapper.map(cardDetails, CardDetailDTO.class);
     return cardDetailDTO;
   }
 
@@ -60,8 +62,7 @@ public class CardSchemeService {
     }
     Optional<List<Map<Long, Long>>> stats = cardDetailsRepository.getStats(start - 1, limit);
     if (stats.isPresent() && stats.get().size() != 0) {
-      Long size = Long.valueOf(stats.get().size());
-      return success(stats.get(), start, limit, size);
+      return success(stats.get(), start, limit);
     } else {
       return failure("No Stats Found");
     }

@@ -5,19 +5,17 @@ public class CommonResponseDTO<T> {
   private T payload;
   private long start;
   private long limit;
-  private long size;
 
   public CommonResponseDTO(boolean success, T payload) {
     this.success = success;
     this.payload = payload;
   }
 
-  public CommonResponseDTO(boolean success, T payload, long start, long limit, long size) {
+  public CommonResponseDTO(boolean success, T payload, long start, long limit) {
     this.success = success;
     this.payload = payload;
     this.start = start;
     this.limit = limit;
-    this.size = size;
   }
 
   public boolean isSuccess() {
@@ -56,20 +54,12 @@ public class CommonResponseDTO<T> {
     return this;
   }
 
-  public long getSize() {
-    return size;
-  }
-
-  public CommonResponseDTO setSize(long size) {
-    this.size = size;
-    return this;
-  }
   public static<T> CommonResponseDTO<T> success(T payload){
     return new CommonResponseDTO(true, payload);
   }
 
-  public static <T> CommonResponseDTO<T> success(T payload, Long start, Long limit, Long size) {
-    return new CommonResponseDTO(true, payload, start, limit, size);
+  public static <T> CommonResponseDTO<T> success(T payload, Long start, Long limit) {
+    return new CommonResponseDTO(true, payload, start, limit);
   }
 
   public static<T> CommonResponseDTO<T> failure(String errorMessage){
