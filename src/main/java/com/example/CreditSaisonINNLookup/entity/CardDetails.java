@@ -14,6 +14,7 @@ public class CardDetails {
   @Column(name = "id")
   private int id;
   private Long bin;
+  private Long callCount = 0L;
   @Embedded
   private Number number;
   private String scheme;
@@ -40,6 +41,15 @@ public class CardDetails {
 
   public CardDetails setBin(Long bin) {
     this.bin = bin;
+    return this;
+  }
+
+  public Long getCallCount() {
+    return callCount;
+  }
+
+  public CardDetails setCallCount(Long callCount) {
+    this.callCount = callCount;
     return this;
   }
 

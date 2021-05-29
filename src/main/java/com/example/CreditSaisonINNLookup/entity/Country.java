@@ -13,8 +13,8 @@ public class Country {
   private String name;
   private String emoji;
   private String currency;
-  private int latitude;
-  private int longitude;
+  private double latitude;
+  private double longitude;
 
   public String getNumeric() {
     return numeric;
@@ -61,20 +61,20 @@ public class Country {
     return this;
   }
 
-  public int getLatitude() {
+  public double getLatitude() {
     return latitude;
   }
 
-  public Country setLatitude(int latitude) {
+  public Country setLatitude(double latitude) {
     this.latitude = latitude;
     return this;
   }
 
-  public int getLongitude() {
+  public double getLongitude() {
     return longitude;
   }
 
-  public Country setLongitude(int longitude) {
+  public Country setLongitude(double longitude) {
     this.longitude = longitude;
     return this;
   }

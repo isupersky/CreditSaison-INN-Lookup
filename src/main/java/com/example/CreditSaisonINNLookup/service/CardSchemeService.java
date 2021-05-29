@@ -7,6 +7,8 @@ import com.example.CreditSaisonINNLookup.dto.CardDetailDTO;
 import com.example.CreditSaisonINNLookup.dto.CommonResponseDTO;
 import com.example.CreditSaisonINNLookup.entity.CardDetails;
 import com.example.CreditSaisonINNLookup.repository.CardDetailsRepository;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -29,12 +31,15 @@ public class CardSchemeService {
     HttpEntity<String> entity = new HttpEntity<>(headers);
     Optional<CardDetails> cardDetails = cardDetailsRepository.findByBin(bin);
     if (cardDetails.isPresent()) {
+      cardDetails.get().setCallCount(cardDetails.get().getCallCount() + 1);
+      cardDetailsRepository.save(cardDetails.get());
       return success(mapCardDetailsToCardDetailDTO(cardDetails.get()));
     }
     try {
       responseEntity = restTemplate
           .exchange("https://lookup.binlist.net/" + bin, HttpMethod.GET, entity, CardDetails.class);
       responseEntity.getBody().setBin(bin);
+      responseEntity.getBody().setCallCount(1L);
       cardDetailsRepository.save(responseEntity.getBody());
     } catch (Exception e) {
       return failure("Invalid BIN/INN number");
@@ -42,11 +47,23 @@ public class CardSchemeService {
     return success(mapCardDetailsToCardDetailDTO(responseEntity.getBody()));
   }
 
-  private CardDetailDTO mapCardDetailsToCardDetailDTO(CardDetails cardDetails){
+  private CardDetailDTO mapCardDetailsToCardDetailDTO(CardDetails cardDetails) {
     CardDetailDTO cardDetailDTO = new CardDetailDTO();
     cardDetailDTO.setScheme(cardDetails.getScheme()).setBank(cardDetails.getBank().getName())
         .setType(cardDetails.getType());
     return cardDetailDTO;
   }
 
+  public CommonResponseDTO<List<Map<Long, Long>>> getStats(Long start, Long limit) {
+    if (start < 1 || limit < 1) {
+      return failure("invalid Inputs: values of start and limit must be greater than 0");
+    }
+    Optional<List<Map<Long, Long>>> stats = cardDetailsRepository.getStats(start - 1, limit);
+    if (stats.isPresent() && stats.get().size() != 0) {
+      Long size = Long.valueOf(stats.get().size());
+      return success(stats.get(), start, limit, size);
+    } else {
+      return failure("No Stats Found");
+    }
+  }
 }
