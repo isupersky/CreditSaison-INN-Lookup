@@ -6,7 +6,6 @@ import com.example.CreditSaisonINNLookup.entity.Number;
 
 public class CardDetailDTO {
 
-  private Long bin;
   private Number number;
   private String scheme;
   private String type;
@@ -14,14 +13,6 @@ public class CardDetailDTO {
   private boolean prepaid;
   private Country country;
   private Bank bank;
-
-  public Long getBin() {
-    return bin;
-  }
-
-  public void setBin(Long bin) {
-    this.bin = bin;
-  }
 
   public Number getNumber() {
     return number;

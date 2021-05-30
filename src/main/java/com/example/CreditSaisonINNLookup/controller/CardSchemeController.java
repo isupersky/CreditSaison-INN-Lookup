@@ -21,6 +21,7 @@ public class CardSchemeController {
 
   @GetMapping("verify/{bin}")
   public CommonResponseDTO<CardDetailDTO> verifyCardScheme(@PathVariable("bin") Long bin) {
+    System.out.println("API CALLED");
     return cardSchemeService.verifyCardScheme(bin);
   }
 
